@@ -1,0 +1,11 @@
+{
+  "name": "kaiser.gallery",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "hugo --gc --minify",
+    "deploy": "rsync -avz --delete public/ nico@server.kaiser.me:~/www/kaiser.gallery/public"
+  },
+  "author": "Nico Kaiser",
+  "license": "ISC"
+}
