@@ -1,0 +1,27 @@
+<div id="nav-breadcrumb" class="navbar navbar-expand-lg bg-body-secondary shadow-sm sticky-top mb-2">
+  <div class="container-fluid">
+    <ol class="breadcrumb m-0 py-2 d-inline-flex flex-nowrap text-truncate">
+      <li class="breadcrumb-item">
+        <a class="text-body-emphasis" href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+          <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+        </a>
+      </li>
+
+      {{- range after 1 .Ancestors.Reverse }}
+        <li class="breadcrumb-item text-truncate">
+          <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}">
+            {{ .Title }}
+          </a>
+        </li>
+      {{- end }}
+
+      {{ if and (not .IsHome) (not (eq .Kind "404")) }}
+        <li class="breadcrumb-item text-truncate">
+          <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}">
+            {{ .Title }}
+          </a>
+        </li>
+      {{ end }}
+    </ol>
+  </div>
+</div>

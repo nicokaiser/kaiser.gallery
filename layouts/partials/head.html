@@ -1,0 +1,25 @@
+<head>
+  {{ if .IsHome -}}
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+  {{- else -}}
+      <title>{{ .Title }} – {{ .Site.Title }}</title>
+  {{- end }}
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  {{ hugo.Generator }}
+  {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+  {{ template "_internal/opengraph.html" . }}
+  {{ $scss := resources.Get "/scss/main.scss" }}
+  {{ $css := $scss | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $css.Permalink }}">
+  <script type="text/javascript" src="{{$.Site.BaseURL}}/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ "js/jquery-3.6.3.slim.min.js" | relURL }}"></script>
+  <script src="{{ "js/jquery.justifiedGallery.min.js"| relURL }}"></script>
+  <link rel="stylesheet" href="{{ "css/justifiedGallery.min.css"| relURL }}"/>
+  <link rel="stylesheet" href="{{ "css/photoswipe.css"| relURL }}">
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css">
+</head>

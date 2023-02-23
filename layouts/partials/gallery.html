@@ -1,0 +1,115 @@
+{{ $photos := sort (.Resources.ByType "image") (index .Params "sort_by" |default "Name") }}
+{{ $sortOrder := "asc" }}
+{{ $thumbnailResizeOptions := "600x300" }}
+{{ $imageResizeOptions := "1600x1600" }}
+{{ $galleryId := (printf "gallery-%v" .Page.File.UniqueID)}}
+{{ $galleryWrapperId := (printf "gallery-%v-wrapper" .Page.File.UniqueID)}}
+
+<div class="container-fluid py-3">
+  <div id="{{ $galleryWrapperId }}" class="gallery-wrapper">
+    <div id="{{ $galleryId }}" class="justified-gallery">
+      {{ range $original := sort $photos "Name" $sortOrder}}
+        {{ if eq $original.ResourceType "image" }}
+          {{ $metadata := dict }}
+          {{ with $original.Exif }}
+            {{ $metadata = merge .Tags $metadata }}
+          {{ end }}
+          {{ $rotation := "" }}
+          {{ with $metadata.Orientation }}
+            {{ if or (eq . 8) (eq . 7) }}
+              {{ $rotation = " r90" }}
+            {{ else if or (eq . 3) (eq . 4) }}
+              {{ $rotation = " r180" }}
+            {{ else if or (eq . 6) (eq . 5) }}
+              {{ $rotation = " r270" }}
+            {{ end }}
+          {{ end }}
+          {{ $thumbnail := ($original.Fit (printf "%s %s" $thumbnailResizeOptions $rotation)) }}
+          <div>
+            {{ $full := "" }}
+            {{ if $imageResizeOptions }}
+              {{ $full = ($original.Fit (printf "%s %s" $imageResizeOptions $rotation)) }}
+            {{ else }}
+              {{ $full = $original }}
+            {{ end }}
+            <a href="{{ $full.RelPermalink }}" 
+              class="galleryImg"
+              data-pswp-width="{{ $full.Width }}"
+              data-pswp-height="{{ $full.Height }}"    
+              {{ with $metadata }}
+                {{ if .Title }}
+                  title="{{ .Title }}"
+                {{ else if .ImageDescription }}
+                  title="{{ .ImageDescription }}"
+                {{ end }}
+              {{ end }}
+              >
+              <img
+                width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}"
+                loading="lazy"
+                src="{{ $thumbnail.RelPermalink }}"
+                {{ with $metadata }}
+                  {{ if .ImageDescription }}
+                    alt="{{ .ImageDescription }}"
+                  {{ else }}
+                    {{ if .Title}}
+                      alt="{{ .Title }}"
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              >
+            </a>
+          </div>
+        {{ end }}
+      {{ end}}
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import PhotoSwipeLightbox from '{{ "js/photoswipe-lightbox.esm.min.js" | relURL }}';
+  import PhotoSwipeDynamicCaption from '{{ "js/photoswipe-dynamic-caption-plugin.esm.min.js" | relURL }}';
+
+  $(document).ready(() => {
+    const gallery = $("#{{ $galleryId }}");
+
+    gallery.on('jg.complete', () => {
+      const smallScreenPadding = {
+        top: 0, bottom: 0, left: 0, right: 0
+      };
+      const largeScreenPadding = {
+        top: 30, bottom: 30, left: 0, right: 0
+      };
+
+      const lightbox = new PhotoSwipeLightbox({
+        gallery: '#{{ $galleryId }}',
+        children: 'a',
+        showHideAnimationType: 'zoom',
+        bgOpacity: 1,
+        pswpModule: () => import('{{ "js/photoswipe.esm.min.js" | relURL }}'),
+        imageClickAction: 'close',
+        paddingFn: (viewportSize) => {
+          return viewportSize.x < 700 ? smallScreenPadding : largeScreenPadding
+        },
+      });
+
+      const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+        mobileLayoutBreakpoint: 700,
+        type: 'auto',
+        mobileCaptionOverlapRatio: 1
+      });
+
+      lightbox.init();
+    });
+
+    gallery.justifiedGallery({
+      rowHeight: 200,
+      maxRowHeight: 300,
+      margins: 10,
+      border : 0,
+      waitThumbnailsLoad: false,
+      lastRow: 'nojustify',
+      captions : false
+    });
+  });
+</script>

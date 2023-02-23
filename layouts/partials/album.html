@@ -1,0 +1,30 @@
+{{ $images := .Resources.ByType "image" }}
+{{ if gt (len $images) 0 }}
+  {{/* Get featured image */}}
+  {{ $feature := ($images.GetMatch (.Params.featured_image | default "*feature*")) | default (index $images 0) }}
+  {{ $thumbnail := $feature.Fill "520x360" }}
+  {{ $counts := partial "GetCounts.html" . }}
+  <div class="col py-3">
+    <div class="card bg-body-tertiary">
+      <div class="h-100">
+        <a href="{{ .RelPermalink }}">
+          <img class="card-img-top" src="{{ $thumbnail.RelPermalink }}" alt="{{ $.Title }}" 
+          title="{{ $.Title }}">
+        </a>
+        <div class="card-body pb-1">
+          <h5 class="card-title text-truncate">
+            <a class="link-body-emphasis" href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h5>
+        </div>
+        <div class="card-footer pt-1 text-muted">
+          <small class="d-inline-block text-truncate">
+            {{ $counts.images }} {{ if eq $counts.images 1 }} Foto {{ else }} Fotos {{ end }}
+            {{ if gt $counts.albums 0 }}
+              in {{ $counts.albums }} {{ if eq $counts.albums 1 }} Album {{ else }} Alben {{ end }}
+            {{ end }}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

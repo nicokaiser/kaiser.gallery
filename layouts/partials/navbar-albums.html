@@ -1,0 +1,36 @@
+<ul class="navbar-nav navbar-nav-scroll my-2" style="--bs-scroll-height: 50vh">
+  {{ template "navbar-albums" (dict "context" .Site.Home "currentPage" . "level" 0)}}
+</ul>
+
+{{ define "navbar-albums" }}
+  {{ $context := .context }}
+  {{ $currentPage := .currentPage }}
+  {{ $level := .level }}
+  {{ with $context }}
+    {{ range where .Pages "Params.private" "ne" true }}
+      {{ if .IsSection }}
+        {{ $active := false }}
+        {{ if or (eq . $currentPage) (.IsAncestor $currentPage) }}
+          {{ $active = true }}
+        {{ end }}
+        <li class="nav-item" style="padding-left: {{ $level }}em;">
+          <a class="nav-link {{ if $active }} active {{ end }}" href="{{ .RelPermalink }}">
+            {{ .Title }}
+          </a>
+        </li>
+        {{ if $active }}
+          {{ template "navbar-albums" (dict "context" . "currentPage" $currentPage "level" (add $level 1))}}
+        {{ end }}
+      {{ else }}
+        {{ $count := (len (.Resources.ByType "image")) }}
+        {{ if gt $count 0 }}
+          <li class="nav-item" style="padding-left: {{ $level }}em;">
+            <a class="nav-link {{ if (eq . $currentPage) }} active {{ end }}" href="{{ .RelPermalink }}">
+              {{ .Title }}
+            </a>
+          </li>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
