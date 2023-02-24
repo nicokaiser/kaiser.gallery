@@ -6,6 +6,5 @@
     "build": "hugo --gc --minify",
     "deploy": "rsync -avz --delete public/ nico@server.kaiser.me:~/www/kaiser.gallery/public"
   },
-  "author": "Nico Kaiser",
-  "license": "ISC"
+  "author": "Nico Kaiser"
 }

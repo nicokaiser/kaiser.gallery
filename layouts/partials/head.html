@@ -16,14 +16,13 @@
   {{ $scss := resources.Get "/scss/main.scss" }}
   {{ $css := $scss | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
-  
   {{ $assets := newScratch }}
+  {{ $assets.Add "js" (slice (resources.Get "js/bootstrap.bundle.js")) }}
   {{ $assets.Add "js" (slice (resources.Get "js/jquery-3.6.3.slim.min.js")) }}
-  {{ $assets.Add "js" (slice (resources.Get "js/ResizeObserver.js" ))}}
-  {{ $assets.Add "js" (slice (resources.Get "js/jquery.justifiedGallery.js" ))}}
-  {{ $assets.Add "js" (slice (resources.Get "js/photoswipe.umd.min.js" ))}}
-  {{ $assets.Add "js" (slice (resources.Get "js/photoswipe-lightbox.umd.min.js" ))}}
-  {{ $assets.Add "js" (slice (resources.Get "js/photoswipe-dynamic-caption-plugin.umd.min.js" ))}}
+  {{ $assets.Add "js" (slice (resources.Get "js/jquery.justifiedGallery.js")) }}
+  {{ $assets.Add "js" (slice (resources.Get "js/photoswipe.umd.min.js")) }}
+  {{ $assets.Add "js" (slice (resources.Get "js/photoswipe-lightbox.umd.min.js")) }}
+  {{ $assets.Add "js" (slice (resources.Get "js/photoswipe-dynamic-caption-plugin.umd.min.js")) }}
   {{ $js := $assets.Get "js" | resources.Concat "js/main.bundle.js" | resources.Minify | resources.Fingerprint }}
   <script type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 </head>
