@@ -66,10 +66,7 @@
   </div>
 </div>
 
-<script type="module">
-  import PhotoSwipeLightbox from '{{ "js/photoswipe-lightbox.esm.min.js" | relURL }}';
-  import PhotoSwipeDynamicCaption from '{{ "js/photoswipe-dynamic-caption-plugin.esm.min.js" | relURL }}';
-
+<script type="text/javascript">
   $(document).ready(() => {
     const gallery = $("#{{ $galleryId }}");
 
@@ -86,7 +83,7 @@
         children: 'a',
         showHideAnimationType: 'zoom',
         bgOpacity: 1,
-        pswpModule: () => import('{{ "js/photoswipe.esm.min.js" | relURL }}'),
+        pswpModule: PhotoSwipe,
         imageClickAction: 'close',
         paddingFn: (viewportSize) => {
           return viewportSize.x < 700 ? smallScreenPadding : largeScreenPadding
