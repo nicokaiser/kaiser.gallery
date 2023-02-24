@@ -1,71 +1,64 @@
 {{ $photos := sort (.Resources.ByType "image") (index .Params "sort_by" |default "Name") }}
 {{ $sortOrder := "asc" }}
-{{ $thumbnailResizeOptions := "600x300" }}
+{{ $thumbnailResizeOptions := "600x400" }}
 {{ $imageResizeOptions := "1600x1600" }}
 {{ $galleryId := (printf "gallery-%v" .Page.File.UniqueID)}}
-{{ $galleryWrapperId := (printf "gallery-%v-wrapper" .Page.File.UniqueID)}}
 
 <div class="container-fluid py-3">
-  <div id="{{ $galleryWrapperId }}" class="gallery-wrapper">
-    <div id="{{ $galleryId }}" class="justified-gallery">
-      {{ range $original := sort $photos "Name" $sortOrder}}
-        {{ if eq $original.ResourceType "image" }}
-          {{ $metadata := dict }}
-          {{ with $original.Exif }}
-            {{ $metadata = merge .Tags $metadata }}
+  <div id="{{ $galleryId }}" class="fj-gallery">
+    {{ range $original := sort $photos "Name" $sortOrder}}
+      {{ if eq $original.ResourceType "image" }}
+        {{ $metadata := dict }}
+        {{ with $original.Exif }}
+          {{ $metadata = merge .Tags $metadata }}
+        {{ end }}
+        {{ $rotation := "" }}
+        {{ with $metadata.Orientation }}
+          {{ if or (eq . 8) (eq . 7) }}
+            {{ $rotation = " r90" }}
+          {{ else if or (eq . 3) (eq . 4) }}
+            {{ $rotation = " r180" }}
+          {{ else if or (eq . 6) (eq . 5) }}
+            {{ $rotation = " r270" }}
           {{ end }}
-          {{ $rotation := "" }}
-          {{ with $metadata.Orientation }}
-            {{ if or (eq . 8) (eq . 7) }}
-              {{ $rotation = " r90" }}
-            {{ else if or (eq . 3) (eq . 4) }}
-              {{ $rotation = " r180" }}
-            {{ else if or (eq . 6) (eq . 5) }}
-              {{ $rotation = " r270" }}
+        {{ end }}
+        {{ $thumbnail := ($original.Fit (printf "%s %s" $thumbnailResizeOptions $rotation)) }}
+        {{ $full := ($original.Fit (printf "%s %s" $imageResizeOptions $rotation)) }}
+        <a href="{{ $full.RelPermalink }}"
+          class="fj-gallery-item"
+          data-pswp-width="{{ $full.Width }}"
+          data-pswp-height="{{ $full.Height }}"    
+          {{ with $metadata }}
+            {{ if .Title }}
+              title="{{ .Title }}"
+            {{ else if .ImageDescription }}
+              title="{{ .ImageDescription }}"
             {{ end }}
           {{ end }}
-          {{ $thumbnail := ($original.Fit (printf "%s %s" $thumbnailResizeOptions $rotation)) }}
-          <div>
-            {{ $full := ($original.Fit (printf "%s %s" $imageResizeOptions $rotation)) }}
-            <a href="{{ $full.RelPermalink }}" 
-              class="galleryImg"
-              data-pswp-width="{{ $full.Width }}"
-              data-pswp-height="{{ $full.Height }}"    
-              {{ with $metadata }}
-                {{ if .Title }}
-                  title="{{ .Title }}"
-                {{ else if .ImageDescription }}
-                  title="{{ .ImageDescription }}"
+          >
+          <img
+            width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}"
+            src="{{ $thumbnail.RelPermalink }}"
+            {{ with $metadata }}
+              {{ if .ImageDescription }}
+                alt="{{ .ImageDescription }}"
+              {{ else }}
+                {{ if .Title}}
+                  alt="{{ .Title }}"
                 {{ end }}
               {{ end }}
-              >
-              <img
-                width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}"
-                loading="lazy"
-                src="{{ $thumbnail.RelPermalink }}"
-                {{ with $metadata }}
-                  {{ if .ImageDescription }}
-                    alt="{{ .ImageDescription }}"
-                  {{ else }}
-                    {{ if .Title}}
-                      alt="{{ .Title }}"
-                    {{ end }}
-                  {{ end }}
-                {{ end }}
-              >
-            </a>
-          </div>
-        {{ end }}
-      {{ end}}
-    </div>
+            {{ end }}
+          >
+        </a>
+      {{ end }}
+    {{ end}}
   </div>
 </div>
 
 <script type="text/javascript">
-  $(document).ready(() => {
-    const gallery = $("#{{ $galleryId }}");
-
-    gallery.on('jg.complete', () => {
+  fjGallery(document.querySelectorAll('.fj-gallery'), {
+    itemSelector: '.fj-gallery-item',
+    onInit: () => {
       const smallScreenPadding = {
         top: 0, bottom: 0, left: 0, right: 0
       };
@@ -92,16 +85,6 @@
       });
 
       lightbox.init();
-    });
-
-    gallery.justifiedGallery({
-      rowHeight: 200,
-      maxRowHeight: 300,
-      margins: 10,
-      border : 0,
-      waitThumbnailsLoad: false,
-      lastRow: 'nojustify',
-      captions : false
-    });
+    }
   });
 </script>

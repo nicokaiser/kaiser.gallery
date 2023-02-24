@@ -18,8 +18,7 @@
   {{ $css := $scss | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
   <script type="text/javascript" src="{{ "js/bootstrap.bundle.min.js" | relURL }}"></script>
-  <script type="text/javascript" src="{{ "js/jquery-3.6.3.slim.min.js" | relURL }}"></script>
-  <script type="text/javascript" src="{{ "js/jquery.justifiedGallery.js" | relURL }}"></script>
+  <script type="text/javascript" src="{{ "js/fjGallery.min.js" | relURL }}"></script>
   <script type="text/javascript" src="{{ "js/photoswipe.umd.min.js" | relURL }}"></script>
   <script type="text/javascript" src="{{ "js/photoswipe-lightbox.umd.min.js" | relURL }}"></script>
   <script type="text/javascript" src="{{ "js/photoswipe-dynamic-caption-plugin.umd.min.js" | relURL }}"></script>
