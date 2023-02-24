@@ -12,9 +12,6 @@ enableRobotsTXT = true
   priority = 0.5
   filename = "sitemap.xml"
 
-[params]
-  description = "Capturing moments, music, people and events"
-
 [imaging]
   resampleFilter = "CatmullRom"
   quality = 75
