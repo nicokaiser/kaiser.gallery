@@ -26,12 +26,7 @@
           {{ end }}
           {{ $thumbnail := ($original.Fit (printf "%s %s" $thumbnailResizeOptions $rotation)) }}
           <div>
-            {{ $full := "" }}
-            {{ if $imageResizeOptions }}
-              {{ $full = ($original.Fit (printf "%s %s" $imageResizeOptions $rotation)) }}
-            {{ else }}
-              {{ $full = $original }}
-            {{ end }}
+            {{ $full := ($original.Fit (printf "%s %s" $imageResizeOptions $rotation)) }}
             <a href="{{ $full.RelPermalink }}" 
               class="galleryImg"
               data-pswp-width="{{ $full.Width }}"
