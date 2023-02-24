@@ -6,16 +6,9 @@
       <div class="col py-3">
         <div class="card">
           <div class="h-100">
-            <a href="{{ .RelPermalink }}" data-index="{$idx}" class="ripple d-block">
-              <img class="card-img thumb-img" src="{{ $thumbnail.RelPermalink }}" alt=".Title" title=".Title">
+            <a href="{{ .RelPermalink }}" data-index="{$idx}" class="d-block">
+              <img style="aspect-ratio: 520 / 360;" class="card-img d-block" src="{{ $thumbnail.RelPermalink }}" alt=".Title" title=".Title">
             </a>
-            {{/*
-            <div class="card-body pb-1">
-              <h6 class="card-title text-truncate">
-                <a href="{$thumbnail.URL}">{{ .Title }}</a>
-              </h6>
-            </div>
-            */}}
           </div>
         </div>
       </div>

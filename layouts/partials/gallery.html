@@ -38,6 +38,7 @@
           >
           <img
             width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}"
+            loading="lazy"
             src="{{ $thumbnail.RelPermalink }}"
             {{ with $metadata }}
               {{ if .ImageDescription }}
