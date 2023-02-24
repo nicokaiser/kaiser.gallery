@@ -24,6 +24,7 @@
         {{ end }}
         {{ $thumbnail := ($original.Fit (printf "%s %s" $thumbnailResizeOptions $rotation)) }}
         {{ $full := ($original.Fit (printf "%s %s" $imageResizeOptions $rotation)) }}
+        {{ $color := index $thumbnail.Colors 0 | default "transparent" }}
         <a href="{{ $full.RelPermalink }}"
           class="fj-gallery-item"
           data-pswp-width="{{ $full.Width }}"
@@ -40,6 +41,7 @@
             width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}"
             loading="lazy"
             src="{{ $thumbnail.RelPermalink }}"
+            style="background-color: {{ $color }};"
             {{ with $metadata }}
               {{ if .ImageDescription }}
                 alt="{{ .ImageDescription }}"
