@@ -16,7 +16,11 @@
   {{ $scss := resources.Get "/scss/main.scss" }}
   {{ $css := $scss | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
-  <script type="text/javascript" src="{{$.Site.BaseURL}}/js/bootstrap.bundle.min.js"></script>
-  <script src="{{ "js/jquery-3.6.3.slim.min.js" | relURL }}"></script>
-  <script src="{{ "js/jquery.justifiedGallery.min.js"| relURL }}"></script>
+  
+  {{ $assets := newScratch }}
+  {{ $assets.Add "js" (slice (resources.Get "js/jquery-3.6.3.slim.min.js")) }}
+  {{ $assets.Add "js" (slice (resources.Get "js/ResizeObserver.js" ))}}
+  {{ $assets.Add "js" (slice (resources.Get "js/jquery.justifiedGallery.js" ))}}
+  {{ $js := $assets.Get "js" | resources.Concat "js/main.bundle.js" | resources.Minify | resources.Fingerprint }}
+  <script defer type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 </head>
