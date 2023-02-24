@@ -8,7 +8,7 @@ defaultContentLanguage = "de"
 enableRobotsTXT = true
 
 [sitemap]
-  changefreq = "weekly"
+  changefreq = "daily"
   priority = 0.5
   filename = "sitemap.xml"
 
