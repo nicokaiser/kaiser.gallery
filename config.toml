@@ -6,7 +6,6 @@ copyright = "© Nico Kaiser"
 disableKinds = ["taxonomy", "taxonomyTerm"]
 defaultContentLanguage = "de"
 enableRobotsTXT = true
-timeout = "120s"
 
 [sitemap]
   changefreq = "weekly"
