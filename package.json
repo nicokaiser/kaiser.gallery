@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "hugo --gc --minify",
-    "deploy:rsync": "rsync -avz --delete public/ nico@server.kaiser.me:~/www/kaiser.gallery/public",
+    "predeploy": "npm run build",
     "deploy": "rclone sync --progress --sftp-host server.kaiser.me  --sftp-user nico public/ :sftp:www/kaiser.gallery/public"
   },
   "author": "Nico Kaiser"
