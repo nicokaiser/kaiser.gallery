@@ -3,7 +3,7 @@ title = "Nico Kaiser"
 languageCode = "de-de"
 author = "Nico Kaiser"
 copyright = "© Nico Kaiser"
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["taxonomy", "term"]
 defaultContentLanguage = "de"
 enableRobotsTXT = true
 
@@ -15,3 +15,7 @@ enableRobotsTXT = true
 [imaging]
   resampleFilter = "CatmullRom"
   quality = 75
+  [imaging.exif]
+    disableDate = false
+    disableLatLong = true
+
