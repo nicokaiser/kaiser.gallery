@@ -1,6 +1,10 @@
 {{ define "main"}}
-  <div class="container py-3">
-    <h1 class="my-3 lh-sm">{{ .Title }}</h1>
-    {{ .Content }}
+  <div class="container-fluid py-3">
+    <div class="row justify-content-center">
+      <div class="col-xl-7 col-lg-8">
+        <h1 class="my-3 lh-sm">{{ .Title }}</h1>
+        {{ .Content }}
+      </div>
+  </div>
   </div>
 {{ end }}
