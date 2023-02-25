@@ -1,5 +1,5 @@
 title = "Nico Kaiser"
-#baseURL = "https://kaiser.gallery/"
+baseURL = "https://kaiser.gallery/"
 languageCode = "de-de"
 author = "Nico Kaiser"
 copyright = "© Nico Kaiser"
