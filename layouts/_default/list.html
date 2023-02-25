@@ -1,6 +1,6 @@
 {{ define "main"}}
   <div class="container-fluid">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 thumbnails">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 thumbnails">
       {{ range where .Pages.ByDate.Reverse "Params.private" "ne" true }}
         {{- partial "album" . -}}
       {{ end }}

@@ -1,6 +1,11 @@
 {{ define "main"}}
 <div class="text-center py-5">
   <h1 class="display-1">404</h1>
-  <h2>Seite nicht gefunden</h2>
+  <h2>{{ i18n "pageNotFound" }}</h2>
+  <div class="my-5">
+    <a href="{{ .Site.Home.RelPermalink }}" class="btn btn-lg btn-link">
+      {{ i18n "toHomepage" }}
+    </a>
+  </div>
 </div>
 {{ end }}

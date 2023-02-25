@@ -19,9 +19,10 @@
         </div>
         <div class="card-footer pt-1 text-muted">
           <small class="d-inline-block text-truncate">
-            {{ $counts.images }} {{ if eq $counts.images 1 }} Foto {{ else }} Fotos {{ end }}
+            {{ i18n "photoCount" $counts.images }}
             {{ if gt $counts.albums 0 }}
-              in {{ $counts.albums }} {{ if eq $counts.albums 1 }} Album {{ else }} Alben {{ end }}
+              {{ i18n "in" }}
+              {{ i18n "albumCount" $counts.albums }}
             {{ end }}
           </small>
         </div>
