@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "dev": "hugo server",
     "build": "hugo --gc --minify",
     "predeploy": "npm run build",
     "deploy": "rclone sync --progress --sftp-host server.kaiser.me  --sftp-user nico public/ :sftp:www/kaiser.gallery/public"
