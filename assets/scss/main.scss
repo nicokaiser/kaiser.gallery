@@ -21,7 +21,7 @@ $card-inner-border-radius: $card-border-radius;
 $card-box-shadow: $box-shadow;
 $link-decoration: none;
 $body-bg-dark: #1a1d20; /* --bs-dark-bg-subtle */
-
+$enable-caret: false;
 
 // @import "bootstrap/bootstrap";
 @import "bootstrap/maps";
@@ -38,7 +38,7 @@ $body-bg-dark: #1a1d20; /* --bs-dark-bg-subtle */
 // @import "forms";
 @import "bootstrap/buttons";
 @import "bootstrap/transitions";
-// @import "bootstrap/dropdown";
+@import "bootstrap/dropdown";
 // @import "bootstrap/button-group";
 @import "bootstrap/nav";
 @import "bootstrap/navbar";
@@ -72,6 +72,10 @@ $body-bg-dark: #1a1d20; /* --bs-dark-bg-subtle */
     text-decoration-color: RGBA(var(--#{$prefix}emphasis-color-rgb), var(--#{$prefix}link-underline-opacity, .75));
     }
   }
+}
+
+.dropdown-menu.bg-body-tertiary .dropdown-item:hover {
+  background: var(--bs-secondary-bg);
 }
 
 // Icons
