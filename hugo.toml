@@ -7,6 +7,11 @@ disableKinds = ["taxonomy", "term"]
 defaultContentLanguage = "de"
 enableRobotsTXT = true
 
+[outputs]
+  page = ["HTML"]
+  home = ["HTML", "RSS"]
+  section = ["HTML"]
+
 [sitemap]
   changefreq = "daily"
   priority = 0.5
