@@ -19,7 +19,7 @@
   {{ template "_internal/opengraph.html" . }}
   {{ $scss := resources.Get "/scss/main.scss" }}
   {{ $css := $scss | resources.ToCSS | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $css.Permalink }}">
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
   {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true) | resources.Fingerprint }}
-  <script src="{{ $js.Permalink }}" defer></script>
+  <script src="{{ $js.RelPermalink }}" defer></script>
 </head>
