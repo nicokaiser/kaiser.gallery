@@ -17,9 +17,3 @@ other = "in"
 [albumCount]
 one = "1 Album"
 other = "{{ .Count }} Alben"
-
-[share]
-other = "Teilen"
-
-[copyLink]
-other = "Link kopieren"
