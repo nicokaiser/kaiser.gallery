@@ -20,6 +20,6 @@
   {{ $scss := resources.Get "/scss/main.scss" }}
   {{ $css := $scss | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
-  {{ $js := resources.Get "js/main.js" | js.Build | resources.Minify | resources.Fingerprint }}
+  {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true) | resources.Fingerprint }}
   <script src="{{ $js.Permalink }}" defer></script>
 </head>
