@@ -2,14 +2,14 @@
 {{ if gt (len $images) 0 }}
   {{/* Get featured image */}}
   {{ $feature := ($images.GetMatch (.Params.featured_image | default "*feature*")) | default (index $images 0) }}
-  {{ $thumbnail := $feature.Fill "520x360" }}
+  {{ $thumbnail := $feature.Fill "900x600" }}
   {{ $color := index $thumbnail.Colors 0 | default "transparent" }}
   {{ $counts := partial "GetCounts.html" . }}
   <div class="col py-3">
     <div class="card bg-body-tertiary shadow">
       <div class="h-100">
         <a href="{{ .RelPermalink }}">
-          <img style="aspect-ratio: 520 / 360; background-color: {{ $color }}" class="card-img-top d-block" src="{{ $thumbnail.RelPermalink }}" alt="{{ $.Title }}" 
+          <img style="aspect-ratio: 3 / 2; background-color: {{ $color }}" class="card-img-top d-block" src="{{ $thumbnail.RelPermalink }}" alt="{{ $.Title }}" 
           title="{{ $.Title }}">
         </a>
         <div class="card-body pb-1">

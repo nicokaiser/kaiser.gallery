@@ -1,6 +1,6 @@
 {{ $photos := sort (.Resources.ByType "image") (index .Params "sort_by" |default "Name") }}
 {{ $sortOrder := "asc" }}
-{{ $thumbnailResizeOptions := "600x400" }}
+{{ $thumbnailResizeOptions := "900x600" }}
 {{ $imageResizeOptions := "1600x1600" }}
 {{ $galleryId := (printf "gallery-%v" .Page.File.UniqueID)}}
 
