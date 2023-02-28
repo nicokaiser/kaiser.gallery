@@ -20,6 +20,10 @@
   {{ $scss := resources.Get "/scss/main.scss" }}
   {{ $css := $scss | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.Permalink }}">
+
+  {{ $js := resources.Get "js/main.js" | js.Build (dict "targetPath" "assets/js/main.js") | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $js.Permalink }}" defer></script>
+
   <script type="text/javascript" src="{{ "js/bootstrap.bundle.min.js" | relURL }}"></script>
   <script type="text/javascript" src="{{ "js/fjGallery.min.js" | relURL }}"></script>
   <script type="text/javascript" src="{{ "js/photoswipe.umd.min.js" | relURL }}"></script>
