@@ -6,7 +6,7 @@
 
 <div class="container-fluid py-3">
   <div id="{{ $galleryId }}" class="fj-gallery">
-    {{ range $original := sort $photos "Name" $sortOrder}}
+    {{ range $index, $original := sort $photos "Name" $sortOrder}}
       {{ if eq $original.ResourceType "image" }}
         {{ $metadata := dict }}
         {{ with $original.Exif }}
@@ -41,7 +41,7 @@
           >
           <img
             width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}"
-            loading="lazy"
+            {{ if gt $index 10 }}loading="lazy"{{ end }}
             src="{{ $thumbnail.RelPermalink }}"
             style="background-color: {{ $color }};"
             {{ with $metadata }}
