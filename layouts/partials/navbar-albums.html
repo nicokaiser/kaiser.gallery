@@ -1,7 +1,6 @@
 <ul class="navbar-nav navbar-nav-scroll my-2" style="--bs-scroll-height: 50vh">
   {{ template "navbar-albums" (dict "context" .Site.Home "currentPage" . "level" 0)}}
 </ul>
-
 {{ define "navbar-albums" }}
   {{ $context := .context }}
   {{ $currentPage := .currentPage }}

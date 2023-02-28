@@ -6,7 +6,6 @@
           <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
         </a>
       </li>
-
       {{- range after 1 .Ancestors.Reverse }}
         <li class="breadcrumb-item text-truncate">
           <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}">
@@ -14,7 +13,6 @@
           </a>
         </li>
       {{- end }}
-
       {{ if and (not .IsHome) (not (eq .Kind "404")) }}
         <li class="breadcrumb-item text-truncate">
           <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}">
