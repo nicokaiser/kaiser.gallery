@@ -2,6 +2,10 @@
 
 A very simple and opinionated photo gallery website built with Hugo and Bootstrap.
 
+![Screenshot](images/screenshot.png)
+
+---
+
 ## Features
 
 - Responsive design
