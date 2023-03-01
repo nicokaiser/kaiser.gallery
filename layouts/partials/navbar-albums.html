@@ -6,7 +6,7 @@
   {{ $currentPage := .currentPage }}
   {{ $level := .level }}
   {{ with $context }}
-    {{ range where .Pages "Params.private" "ne" true }}
+    {{ range where .Pages.ByDate.Reverse "Params.private" "ne" true }}
       {{ if .IsSection }}
         {{ $active := false }}
         {{ if or (eq . $currentPage) (.IsAncestor $currentPage) }}
