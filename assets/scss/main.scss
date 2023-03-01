@@ -10,7 +10,7 @@ $grid-breakpoints: (
     md: 768px,
     lg: 992px,
     xl: 1200px,
-    xxl: 1680px
+    xxl: 1680px // default: 1400px
 );
 
 $box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
@@ -102,30 +102,29 @@ $enable-caret: false;
 
 #nav-breadcrumb {
   .breadcrumb {
+    // Hide all but the first
     & > .breadcrumb-item:nth-child(n+2) {
       display: none;
       min-width: 2em;
     }
 
-    @include media-breakpoint-down(xs) {
-      & > .breadcrumb-item:nth-last-child(-n+2) {
-          display: block;
-      }
-      & > .breadcrumb-item {
-          max-width: 190px;
-      }
+    // X-Small: Show last 2
+    & > .breadcrumb-item:nth-last-child(-n+2) {
+        display: block;
     }
-  
-    @include media-breakpoint-between(sm, md) {
-      & > .breadcrumb-item:nth-last-child(-n+2) {
-          display: block;
-      }
+    & > .breadcrumb-item {
+        max-width: 190px;
+    }
+
+    // Small
+    @include media-breakpoint-up(sm) {
       & > .breadcrumb-item {
           max-width: 250px;
       }
     }
 
-    @include media-breakpoint-between(md, xl) {
+    // Medium: show last 4
+    @include media-breakpoint-up(md) {
       & > .breadcrumb-item:nth-last-child(-n+4) {
           display: block;
       } 
@@ -134,6 +133,7 @@ $enable-caret: false;
       }
     }
 
+    // X-Large: show last 6
     @include media-breakpoint-up(xl) {
       & > .breadcrumb-item:nth-last-child(-n+6) {
           display: block;
@@ -144,7 +144,7 @@ $enable-caret: false;
     }
 
     & > .breadcrumb-item:last-child {
-      max-width: none !important;
+      max-width: none;
     }
   }
 }
