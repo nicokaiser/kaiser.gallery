@@ -5,7 +5,9 @@
       <title>{{ .Title }} – {{ .Site.Title }}</title>
   {{- end }}
   <link rel="canonical" href="{{ .Permalink }}">
-  <link rel="icon" href="data:," />
+  <link rel="icon" type="image/svg+xml" href="{{ "images/favicon.svg" | relURL }}">
+  <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
