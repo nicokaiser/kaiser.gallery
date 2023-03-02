@@ -3,6 +3,10 @@ import PhotoSwipeLightbox from './vendor/photoswipe-lightbox.esm.js';
 import PhotoSwipe from './vendor/photoswipe.esm.js';
 import PhotoSwipeDynamicCaption from './vendor/photoswipe-dynamic-caption-plugin.esm.min.js';
 
+// Bootstrap
+
+import Collapse from './vendor/bootstrap/collapse.js';
+
 const gallery = document.querySelectorAll(".fj-gallery");
 
 // fjGallery
