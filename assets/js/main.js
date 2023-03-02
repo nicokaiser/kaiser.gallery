@@ -1,7 +1,7 @@
-import fjGallery from "./fjGallery.esm.js";
-import PhotoSwipeLightbox from './photoswipe-lightbox.esm.js';
-import PhotoSwipe from './photoswipe.esm.js';
-import PhotoSwipeDynamicCaption from './photoswipe-dynamic-caption-plugin.esm.min.js';
+import fjGallery from "./vendor/fjGallery.esm.js";
+import PhotoSwipeLightbox from './vendor/photoswipe-lightbox.esm.js';
+import PhotoSwipe from './vendor/photoswipe.esm.js';
+import PhotoSwipeDynamicCaption from './vendor/photoswipe-dynamic-caption-plugin.esm.min.js';
 
 const gallery = document.querySelectorAll(".fj-gallery");
 
