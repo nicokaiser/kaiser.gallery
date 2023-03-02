@@ -1,11 +1,13 @@
 title = "Nico Kaiser"
 baseURL = "https://kaiser.gallery/"
 languageCode = "de-de"
-author = "Nico Kaiser"
 copyright = "© Nico Kaiser"
 disableKinds = ["taxonomy", "term"]
 defaultContentLanguage = "de"
 enableRobotsTXT = true
+
+[author]
+  name = "Nico Kaiser"
 
 [outputs]
   page = ["HTML"]

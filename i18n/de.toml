@@ -17,3 +17,6 @@ other = "in"
 [albumCount]
 one = "1 Album"
 other = "{{ .Count }} Alben"
+
+[home]
+other = "Startseite"

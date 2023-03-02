@@ -1,23 +1,31 @@
 <div id="nav-breadcrumb" class="navbar navbar-expand-lg bg-body-secondary shadow-sm sticky-top mb-2">
   <div class="container-fluid">
-    <ol class="breadcrumb m-0 py-2 d-inline-flex flex-nowrap text-truncate">
-      <li class="breadcrumb-item">
-        <a class="text-body-emphasis" href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+    <ol class="breadcrumb m-0 py-2 d-inline-flex flex-nowrap text-truncate" itemscope itemtype="https://schema.org/BreadcrumbList">
+      {{- $data := newScratch }}
+      <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a class="text-body-emphasis" href="{{ .Site.Home.RelPermalink }}" title="{{ i18n "home" }}" itemprop="item">
           <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
         </a>
+        <meta itemprop="position" content="1" />
+        <meta itemprop="name" content="{{ i18n "home" }}" />
       </li>
-      {{- range after 1 .Ancestors.Reverse }}
-        <li class="breadcrumb-item text-truncate">
-          <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}">
-            {{ .Title }}
+      {{- range $index, $value := after 1 .Ancestors.Reverse }}
+        <li class="breadcrumb-item text-truncate" itemprop="itemListElement"  itemscope itemtype="https://schema.org/ListItem">
+          {{- $data.Set "counter" $index }}
+          {{- $data.Add "counter" 2 }}
+          <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}" itemprop="item">
+            <span itemprop="name">{{ .Title }}</span>
           </a>
+          <meta itemprop="position" content="{{ $data.Get "counter"}}" />
         </li>
       {{- end }}
       {{ if and (not .IsHome) (not (eq .Kind "404")) }}
-        <li class="breadcrumb-item text-truncate">
-          <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}">
-            {{ .Title }}
+        <li class="breadcrumb-item text-truncate" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          {{- $data.Add "counter" 1 }}
+          <a class="text-body-emphasis text-truncate" href="{{ .RelPermalink }}" itemprop="item">
+            <span itemprop="name">{{ .Title }}</span>
           </a>
+          <meta itemprop="position" content="{{ $data.Get "counter"}}" />
         </li>
       {{ end }}
     </ol>

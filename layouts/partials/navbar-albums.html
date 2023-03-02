@@ -12,9 +12,9 @@
         {{ if or (eq . $currentPage) (.IsAncestor $currentPage) }}
           {{ $active = true }}
         {{ end }}
-        <li class="nav-item" style="padding-left: {{ $level }}em;">
-          <a class="nav-link {{ if $active }} active {{ end }}" href="{{ .RelPermalink }}">
-            {{ .Title }}
+        <li class="nav-item" style="padding-left: {{ $level }}em;" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+          <a class="nav-link {{ if $active }} active {{ end }}" href="{{ .RelPermalink }}" itemprop="url">
+            <span itemprop="name">{{ .Title }}</span>
           </a>
         </li>
         {{ if $active }}
@@ -23,9 +23,9 @@
       {{ else }}
         {{ $count := (len (.Resources.ByType "image")) }}
         {{ if gt $count 0 }}
-          <li class="nav-item" style="padding-left: {{ $level }}em;">
-            <a class="nav-link {{ if (eq . $currentPage) }} active {{ end }}" href="{{ .RelPermalink }}">
-              {{ .Title }}
+          <li class="nav-item" style="padding-left: {{ $level }}em;" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+            <a class="nav-link {{ if (eq . $currentPage) }} active {{ end }}" href="{{ .RelPermalink }}" itemprop="url">
+              <span itemprop="name">{{ .Title }}</span>
             </a>
           </li>
         {{ end }}

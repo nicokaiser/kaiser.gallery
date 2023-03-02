@@ -38,6 +38,8 @@
               title="{{ .ImageDescription }}"
             {{ end }}
           {{ end }}
+          itemscope
+          itemtype="https://schema.org/ImageObject"
           >
           <img
             width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}"
@@ -54,6 +56,12 @@
               {{ end }}
             {{ end }}
           >
+          <meta itemprop="contentUrl" content="{{ $original.RelPermalink }}">
+          {{ with $.Site.Author }}
+          <span itemprop="creator" itemtype="https://schema.org/Person" itemscope>
+            <meta itemprop="name" content="{{ $.Site.Author.name }}" />
+          </span>
+          {{ end }}
         </a>
       {{ end }}
     {{ end}}
