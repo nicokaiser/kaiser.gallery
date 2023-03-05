@@ -5,6 +5,7 @@ copyright = "© Nico Kaiser"
 disableKinds = ["taxonomy", "term"]
 defaultContentLanguage = "de"
 enableRobotsTXT = true
+timeZone = "Europe/Berlin"
 
 [author]
   name = "Nico Kaiser"
