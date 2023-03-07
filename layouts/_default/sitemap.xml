@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{ range .Data.Pages }}
-    {{ if not .Params.private }}
+    {{- $private := false -}}
+    {{- if .Params.private -}}{{- $private = true -}}{{- end -}}
+    {{- range $value := .Ancestors.Reverse -}}
+      {{- if .Params.private -}}{{- $private = true -}}{{- end -}}
+    {{- end -}}
+    {{- if not $private -}}
         {{- if .Permalink -}}
   <url>
     <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
@@ -22,5 +27,5 @@
   </url>
         {{- end -}}
     {{- end -}}
-  {{ end }}
+  {{- end -}}
 </urlset>

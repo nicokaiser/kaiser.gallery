@@ -26,7 +26,12 @@
     {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{- end -}}
     {{ range where $pages "Params.rss_ignore" "!=" true }}
-    {{- if not .Params.private -}}
+    {{- $private := false -}}
+    {{- if .Params.private -}}{{- $private = true -}}{{- end -}}
+    {{- range $value := .Ancestors.Reverse -}}
+      {{- if .Params.private -}}{{- $private = true -}}{{- end -}}
+    {{- end -}}
+    {{- if not $private -}}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
