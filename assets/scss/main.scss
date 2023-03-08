@@ -39,15 +39,6 @@ $body-bg-dark: $dark-bg-subtle-dark;
 @import "vendor/bootstrap/helpers";
 @import "vendor/bootstrap/utilities/api";
 
-// TODO: should be in boostrap@5.3.0
-.link-body-emphasis {
-  color: RGBA(var(--#{$prefix}emphasis-color-rgb), var(--#{$prefix}link-opacity, 1));
-  &:hover,
-  &:focus {
-    color: RGBA(var(--#{$prefix}emphasis-color-rgb), var(--#{$prefix}link-opacity, .75));
-  }
-}
-
 // Icons
 
 .bi {
