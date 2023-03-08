@@ -16,11 +16,7 @@
           </h5>
           <p class="card-text text-truncate text-body-secondary">
             <small>
-              {{ i18n "photoCount" $counts.images }}
-              {{ if gt $counts.albums 0 }}
-                {{ i18n "in" }}
-                {{ i18n "albumCount" $counts.albums }}
-              {{ end }}
+              {{- i18n "photoCount" $counts.images }} {{ if gt $counts.albums 0 }}{{ i18n "in" }} {{ i18n "albumCount" $counts.albums }}{{ end -}}
             </small>
           </p>
         </div>
