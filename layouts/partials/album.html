@@ -6,7 +6,7 @@
   {{ $color := index $thumbnail.Colors 0 | default "transparent" }}
   {{ $counts := partial "GetCounts.html" . }}
   <div class="col py-3">
-    <div class="card bg-body-tertiary shadow">
+    <div class="card bg-body-tertiary shadow-sm">
       <div class="h-100">
         <a href="{{ .RelPermalink }}">
           <img style="aspect-ratio: 3 / 2; background-color: {{ $color }}" class="card-img-top d-block" src="{{ $thumbnail.RelPermalink }}" alt="{{ $.Title }}" 

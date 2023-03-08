@@ -20,7 +20,6 @@ $card-cap-bg: transparent;
 $card-inner-border-radius: $card-border-radius;
 $link-decoration: none;
 $body-bg-dark: $dark-bg-subtle-dark;
-$enable-caret: false;
 
 @import "vendor/bootstrap/maps";
 @import "vendor/bootstrap/mixins";
@@ -44,13 +43,9 @@ $enable-caret: false;
 // TODO: should be in boostrap@5.3.0
 .link-body-emphasis {
   color: RGBA(var(--#{$prefix}emphasis-color-rgb), var(--#{$prefix}link-opacity, 1));
-  text-decoration-color: RGBA(var(--#{$prefix}emphasis-color-rgb), var(--#{$prefix}link-underline-opacity, 1));
-  @if $link-shade-percentage != 0 {
-    &:hover,
-    &:focus {
+  &:hover,
+  &:focus {
     color: RGBA(var(--#{$prefix}emphasis-color-rgb), var(--#{$prefix}link-opacity, .75));
-    text-decoration-color: RGBA(var(--#{$prefix}emphasis-color-rgb), var(--#{$prefix}link-underline-opacity, .75));
-    }
   }
 }
 
@@ -87,7 +82,7 @@ $enable-caret: false;
 }
 
 .container-fluid {
-    max-width: 1680px;
+    max-width: map-get($grid-breakpoints, "xxl");
 }
 
 // Transitions
@@ -165,6 +160,11 @@ $enable-caret: false;
   background-color: var(--bs-body-bg);
 }
 
+// PhotoSwipe
+
 @import "vendor/photoswipe";
 @import "vendor/photoswipe-dynamic-caption-plugin";
+
+// Flickr's Justified Gallery
+
 @import "vendor/fjGallery";
