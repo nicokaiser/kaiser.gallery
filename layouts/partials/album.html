@@ -12,19 +12,19 @@
           <img style="aspect-ratio: 3 / 2; background-color: {{ $color }}" class="card-img-top d-block" src="{{ $thumbnail.RelPermalink }}" alt="{{ $.Title }}" 
           title="{{ $.Title }}">
         </a>
-        <div class="card-body pb-1">
+        <div class="card-body">
           <h5 class="card-title text-truncate">
             <a class="link-body-emphasis" href="{{ .RelPermalink }}">{{ .Title }}</a>
           </h5>
-        </div>
-        <div class="card-footer pt-1 text-muted">
-          <small class="d-inline-block text-truncate">
-            {{ i18n "photoCount" $counts.images }}
-            {{ if gt $counts.albums 0 }}
-              {{ i18n "in" }}
-              {{ i18n "albumCount" $counts.albums }}
-            {{ end }}
-          </small>
+          <p class="card-text text-truncate text-body-secondary">
+            <small>
+              {{ i18n "photoCount" $counts.images }}
+              {{ if gt $counts.albums 0 }}
+                {{ i18n "in" }}
+                {{ i18n "albumCount" $counts.albums }}
+              {{ end }}
+            </small>
+          </p>
         </div>
       </div>
     </div>
